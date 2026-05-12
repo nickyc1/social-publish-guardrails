@@ -1,0 +1,11 @@
+data/
+output/
+.DS_Store
+.vscode/
+.idea/
+*.swp
+.env
+.env.local
+*.credentials.json
+__pycache__/
+*.pyc
