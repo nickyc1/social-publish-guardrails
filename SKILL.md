@@ -114,3 +114,13 @@ Before enabling real publish calls:
 4. Add rollback / fail-safe handling
 5. Add audit logging for every publish event
 6. Obtain explicit human sign-off
+
+## Related skills
+
+| Skill | Relationship |
+|---|---|
+| [`paid-ads-context`](https://github.com/nickyc1/paid-ads-context) | Reads section 5 (brand voice + visual rules) for caption normalization defaults |
+| [`voice-profile-kit`](https://github.com/nickyc1/voice-profile-kit) | Provides voice rules for caption rewrites before scheduling |
+| [`ad-creative`](https://github.com/nickyc1/ad-creative) | Generates organic-equivalent posts that flow into this queue |
+| [`n8n-recipes`](https://github.com/nickyc1/n8n-recipes) | The cron + Slack approval flow can be wrapped around this skill for production |
+| [`granola-action-items`](https://github.com/nickyc1/granola-action-items) | If a meeting decision approves a post, the action item can trigger this skill's approval flag |
