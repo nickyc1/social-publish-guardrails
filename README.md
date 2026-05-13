@@ -1,5 +1,9 @@
 # social-publish-guardrails
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://makeapullrequest.com)
+
+
 A [Claude Code](https://claude.com/claude-code) skill for scheduling social content with a hard human-approval gate.
 
 The single biggest social ops failure is the wrong content publishing at the wrong time. This skill solves that by forcing every post through an explicit approval state before it can move to ready-to-publish. By default it does planning, scheduling, and tracking only — live publishing requires intentional integration plus operator sign-off.
