@@ -7,11 +7,12 @@ DRAFT PLACEHOLDER:
 """
 
 from pathlib import Path
+import argparse
 import csv
-import sys
 
-INPUT_PATH = Path("skills/social-media-scheduling-autopilot/templates/content-queue-template.csv")
-OUTPUT_PATH = Path("skills/social-media-scheduling-autopilot/data/staged_queue.csv")
+ROOT = Path(__file__).resolve().parents[1]
+DEFAULT_INPUT_PATH = ROOT / "templates" / "content-queue-template.csv"
+DEFAULT_OUTPUT_PATH = ROOT / "data" / "staged_queue.csv"
 
 REQUIRED_FIELDS = [
     "post_id",
@@ -28,14 +29,21 @@ REQUIRED_FIELDS = [
 
 
 def main() -> int:
-    if not INPUT_PATH.exists():
-        print(f"[ERROR] Missing input queue file: {INPUT_PATH}")
+    parser = argparse.ArgumentParser(description="Validate and stage a social publishing queue CSV.")
+    parser.add_argument("input", nargs="?", default=str(DEFAULT_INPUT_PATH), help="Queue CSV input path")
+    parser.add_argument("--output", default=str(DEFAULT_OUTPUT_PATH), help="Staged queue CSV output path")
+    args = parser.parse_args()
+
+    input_path = Path(args.input)
+    output_path = Path(args.output)
+    if not input_path.exists():
+        print(f"[ERROR] Missing input queue file: {input_path}")
         print("[TODO] Point INPUT_PATH to real queue export.")
         return 1
 
-    OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
 
-    with INPUT_PATH.open("r", newline="", encoding="utf-8") as f:
+    with input_path.open("r", newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         missing = [c for c in REQUIRED_FIELDS if c not in (reader.fieldnames or [])]
         if missing:
@@ -44,13 +52,13 @@ def main() -> int:
 
         rows = list(reader)
 
-    with OUTPUT_PATH.open("w", newline="", encoding="utf-8") as f:
+    with output_path.open("w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=REQUIRED_FIELDS)
         writer.writeheader()
         for row in rows:
             writer.writerow({k: row.get(k, "") for k in REQUIRED_FIELDS})
 
-    print(f"[OK] Staged {len(rows)} rows -> {OUTPUT_PATH}")
+    print(f"[OK] Staged {len(rows)} rows -> {output_path}")
     print("[NOTE] Draft scaffold complete. No publishing actions performed.")
     return 0
 

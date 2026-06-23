@@ -8,8 +8,10 @@
 
 ## 2. Queue ingestion
 
+- [ ] If using TweetClaw source exports, run `scripts/00_tweetclaw_export_to_queue.py` first
+- [ ] Confirm imported TweetClaw rows remain `pending`
 - [ ] Place queue CSV at the expected input path
-- [ ] Run `scripts/01_ingest_queue.py`
+- [ ] Run `scripts/01_ingest_queue.py`, passing `data/tweetclaw_queue.csv` when using the TweetClaw import
 - [ ] Confirm `data/staged_queue.csv` is created
 
 ## 3. Caption + attribution normalization

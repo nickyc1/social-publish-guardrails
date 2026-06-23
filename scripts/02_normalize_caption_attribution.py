@@ -9,8 +9,9 @@ DRAFT PLACEHOLDER:
 from pathlib import Path
 import csv
 
-INPUT_PATH = Path("skills/social-media-scheduling-autopilot/data/staged_queue.csv")
-OUTPUT_PATH = Path("skills/social-media-scheduling-autopilot/data/normalized_queue.csv")
+ROOT = Path(__file__).resolve().parents[1]
+INPUT_PATH = ROOT / "data" / "staged_queue.csv"
+OUTPUT_PATH = ROOT / "data" / "normalized_queue.csv"
 
 
 def normalize_caption(caption_raw: str) -> str:

@@ -51,6 +51,17 @@ The skill walks the operator through the five-step workflow. Each step's output 
 
 See [`runbook/RUNBOOK.md`](runbook/RUNBOOK.md) for the manual command sequence.
 
+### Optional X/Twitter source import
+
+If you collect public X/Twitter source posts with [TweetClaw](https://github.com/Xquik-dev/tweetclaw), convert the reviewed JSON export into a queue CSV before ingestion:
+
+```bash
+python3 scripts/00_tweetclaw_export_to_queue.py path/to/tweetclaw-export.json --output data/tweetclaw_queue.csv
+python3 scripts/01_ingest_queue.py data/tweetclaw_queue.csv
+```
+
+The import is local-only, keeps every row `pending`, and leaves approval fields blank so the normal gate still blocks publishing.
+
 ## Approval contract
 
 A post is treated as approved only if all three are present:
@@ -81,7 +92,7 @@ These steps are not provided here on purpose. The skill's job is the approval-ga
 ```
 social-publish-guardrails/
 ├── SKILL.md                  # the skill prompt Claude Code reads
-├── scripts/                  # five workflow scripts (draft, no network)
+├── scripts/                  # workflow scripts (draft, no network)
 ├── templates/                # CSV templates + sheet column maps
 ├── runbook/                  # operator runbook + implementation checklist
 └── README.md

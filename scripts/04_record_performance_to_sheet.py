@@ -10,8 +10,9 @@ from pathlib import Path
 import csv
 from datetime import datetime, timezone
 
-INPUT_PATH = Path("skills/social-media-scheduling-autopilot/data/schedule_plan.csv")
-OUTPUT_PATH = Path("skills/social-media-scheduling-autopilot/data/performance_log.csv")
+ROOT = Path(__file__).resolve().parents[1]
+INPUT_PATH = ROOT / "data" / "schedule_plan.csv"
+OUTPUT_PATH = ROOT / "data" / "performance_log.csv"
 
 
 def main() -> int:
