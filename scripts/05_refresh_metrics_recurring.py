@@ -9,7 +9,8 @@ DRAFT PLACEHOLDER:
 from pathlib import Path
 from datetime import datetime
 
-PERFORMANCE_LOG = Path("data/performance_log.csv")
+ROOT = Path(__file__).resolve().parents[1]
+PERFORMANCE_LOG = ROOT / "data" / "performance_log.csv"
 
 
 def main() -> int:

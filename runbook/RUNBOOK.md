@@ -12,6 +12,12 @@ Execute the social scheduling workflow end-to-end without live publishing.
 
 ## Step-by-step
 
+0. **Optional TweetClaw source import**
+   - Command: `python3 scripts/00_tweetclaw_export_to_queue.py path/to/tweetclaw-export.json --output data/tweetclaw_queue.csv`
+   - Command: `python3 scripts/01_ingest_queue.py data/tweetclaw_queue.csv`
+   - Output: `data/staged_queue.csv`
+   - Validation: imported rows must remain `pending` with blank approval fields
+
 1. **Ingest queue**
    - Command: `python3 scripts/01_ingest_queue.py`
    - Output: `data/staged_queue.csv`

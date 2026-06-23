@@ -1,0 +1,10 @@
+[
+  {
+    "id": "1900000000000000000",
+    "text": "Example public X/Twitter source post for operator review.",
+    "url": "https://x.com/example/status/1900000000000000000",
+    "author": {
+      "username": "example_creator"
+    }
+  }
+]

@@ -71,6 +71,17 @@ social-publish-guardrails/
    - `scripts/04_record_performance_to_sheet.py`
    - `scripts/05_refresh_metrics_recurring.py`
 
+## Optional TweetClaw source import
+
+If source content starts as a reviewed [TweetClaw](https://github.com/Xquik-dev/tweetclaw) JSON export, convert it locally before ingestion:
+
+```bash
+python3 scripts/00_tweetclaw_export_to_queue.py path/to/tweetclaw-export.json --output data/tweetclaw_queue.csv
+python3 scripts/01_ingest_queue.py data/tweetclaw_queue.csv
+```
+
+The converter only reads local JSON, sets every row to `approval_status=pending`, leaves `approved_by` and `approved_at` blank, and performs no publishing or network calls.
+
 ## Execution contract for other agents
 
 When another agent uses this skill, it must:
@@ -122,5 +133,6 @@ Before enabling real publish calls:
 | [`paid-ads-context`](https://github.com/nickyc1/paid-ads-context) | Reads section 5 (brand voice + visual rules) for caption normalization defaults |
 | [`voice-profile-kit`](https://github.com/nickyc1/voice-profile-kit) | Provides voice rules for caption rewrites before scheduling |
 | [`ad-creative`](https://github.com/nickyc1/ad-creative) | Generates organic-equivalent posts that flow into this queue |
+| [`TweetClaw`](https://github.com/Xquik-dev/tweetclaw) | Can supply reviewed public X/Twitter source exports that remain pending until this skill's approval gate passes |
 | [`n8n-recipes`](https://github.com/nickyc1/n8n-recipes) | The cron + Slack approval flow can be wrapped around this skill for production |
 | [`granola-action-items`](https://github.com/nickyc1/granola-action-items) | If a meeting decision approves a post, the action item can trigger this skill's approval flag |
